@@ -1,0 +1,26 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #dddddd;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-size: 0.8em;
+    height: 100%;
+}
+
+#map {
+    height: 450px;
+}
+
+
+#loadStatus {
+    background-color:  rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-right: 20px;
+}

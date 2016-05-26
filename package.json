@@ -1,0 +1,16 @@
+{
+  "name": "raster-mbtiles_offline_with_cordova-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "jshint": "^2.9.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  }
+}
