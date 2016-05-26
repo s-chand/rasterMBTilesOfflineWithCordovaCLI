@@ -7,10 +7,11 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-sqlite-ext": {
+    "cordova-sqlite-evfree-attach-eval": {
         "source": {
-            "type": "registry",
-            "id": "cordova-sqlite-ext"
+            "type": "git",
+            "url": "https://github.com/litehelpers/Cordova-sqlite-evfree-ext",
+            "subdir": "."
         },
         "is_top_level": true,
         "variables": {}

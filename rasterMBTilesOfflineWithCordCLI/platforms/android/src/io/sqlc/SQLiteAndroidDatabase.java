@@ -65,6 +65,25 @@ class SQLiteAndroidDatabase
         mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, null);
     }
 
+    void attachDatabaseNow(File dbfile2, String alias, CallbackContext cbc) {
+        try {
+            // THANKS for guidance:
+            // http://stackoverflow.com/questions/20133760/attach-sqlite-database-in-android-with-sqliteopenhelper
+            this.mydb.execSQL("ATTACH ? AS " + alias, new String[]{ dbfile2.getAbsolutePath() });
+
+            Cursor cur = this.mydb.rawQuery("SELECT * FROM " + alias + ".sqlite_master", null);
+
+            if (cur == null) {
+                cbc.error("ATTACH did not work");
+            } else {
+                cur.close();
+                cbc.success();
+            }
+        } catch(Exception ex) {
+            cbc.error("ATTACH exception: " + ex.getMessage());
+        }
+    }
+
     /**
      * Close a database (in the current thread).
      */
@@ -86,7 +105,7 @@ class SQLiteAndroidDatabase
      * @param dbname     The name of the database.
      * @param queryarr   Array of query strings
      * @param jsonparams Array of JSON query parameters
-     * @param queryIDs   Array of query ids
+     * @param queryIDs   IGNORED: Array of query ids
      * @param cbc        Callback context from Cordova API
      */
     @SuppressLint("NewApi")
@@ -100,14 +119,14 @@ class SQLiteAndroidDatabase
         }
 
         String query = "";
-        String query_id = "";
+        //String query_id = "";
         int len = queryarr.length;
         JSONArray batchResults = new JSONArray();
 
         for (int i = 0; i < len; i++) {
             int rowsAffectedCompat = 0;
             boolean needRowsAffectedCompat = false;
-            query_id = queryIDs[i];
+            //query_id = queryIDs[i];
 
             JSONObject queryResult = null;
             String errorMessage = "unknown";
@@ -144,9 +163,6 @@ class SQLiteAndroidDatabase
                             // Assuming SDK_INT was lying & method not found:
                             // do nothing here & try again with raw query.
                         }
-
-                        // "finally" cleanup myStatement
-                        myStatement.close();
 
                         if (rowsAffected != -1) {
                             queryResult = new JSONObject();
@@ -186,9 +202,6 @@ class SQLiteAndroidDatabase
                         errorMessage = ex.getMessage();
                         Log.v("executeSqlBatch", "SQLiteDatabase.executeInsert(): Error=" + errorMessage);
                     }
-
-                    // "finally" cleanup myStatement
-                    myStatement.close();
                 }
 
                 if (queryType == QueryType.begin) {
@@ -251,7 +264,7 @@ class SQLiteAndroidDatabase
             try {
                 if (queryResult != null) {
                     JSONObject r = new JSONObject();
-                    r.put("qid", query_id);
+                    //r.put("qid", query_id);
 
                     r.put("type", "success");
                     r.put("result", queryResult);
@@ -259,7 +272,7 @@ class SQLiteAndroidDatabase
                     batchResults.put(r);
                 } else {
                     JSONObject r = new JSONObject();
-                    r.put("qid", query_id);
+                    //r.put("qid", query_id);
                     r.put("type", "error");
 
                     JSONObject er = new JSONObject();
@@ -460,11 +473,9 @@ class SQLiteAndroidDatabase
             case Cursor.FIELD_TYPE_FLOAT:
                 row.put(key, cur.getDouble(i));
                 break;
-            // ** KEEP Read BLOB as Base-64 ENABLED in this version branch:
             case Cursor.FIELD_TYPE_BLOB:
                 row.put(key, new String(Base64.encode(cur.getBlob(i), Base64.DEFAULT)));
                 break;
-            // ** */
             case Cursor.FIELD_TYPE_STRING:
             default: /* (not expected) */
                 row.put(key, cur.getString(i));
@@ -485,10 +496,8 @@ class SQLiteAndroidDatabase
             row.put(key, cursor.getLong(i));
         } else if (cursorWindow.isFloat(pos, i)) {
             row.put(key, cursor.getDouble(i));
-        // ** KEEP Read BLOB as Base-64 ENABLED in this version branch:
         } else if (cursorWindow.isBlob(pos, i)) {
             row.put(key, new String(Base64.encode(cursor.getBlob(i), Base64.DEFAULT)));
-        // ** */
         } else { // string
             row.put(key, cursor.getString(i));
         }
