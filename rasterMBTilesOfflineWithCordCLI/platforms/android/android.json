@@ -18,6 +18,11 @@
                         }
                     ]
                 }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": []
+                }
             }
         }
     },
@@ -25,15 +30,15 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-sqlite-evfree-attach-eval": {
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "file": "plugins/cordova-sqlite-evfree-attach-eval/www/SQLitePlugin.js",
-            "id": "cordova-sqlite-evfree-attach-eval.SQLitePlugin",
+            "file": "plugins/cordova-sqlite-ext/www/SQLitePlugin.js",
+            "id": "cordova-sqlite-ext.SQLitePlugin",
             "clobbers": [
                 "SQLitePlugin"
             ]
@@ -41,6 +46,6 @@
     ],
     "plugin_metadata": {
         "cordova-plugin-whitelist": "1.2.2",
-        "cordova-sqlite-evfree-attach-eval": "0.8.1"
+        "cordova-sqlite-ext": "0.10.0"
     }
 }

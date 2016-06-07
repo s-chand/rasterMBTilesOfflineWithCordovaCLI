@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/rasterMBTilesOfflineWithCordCLI/platforms" />
+      <excludeFolder url="file://$MODULE_DIR$/rasterMBTilesOfflineWithCordCLI/plugins/cordova-sqlite-evfree-attach-eval/spec/platforms" />
       <excludeFolder url="file://$MODULE_DIR$/rasterMBTilesOfflineWithCordCLI/plugins/cordova-sqlite-ext/spec/platforms" />
     </content>
     <orderEntry type="inheritedJdk" />

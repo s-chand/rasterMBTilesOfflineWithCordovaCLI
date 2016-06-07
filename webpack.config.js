@@ -15,6 +15,8 @@ module.exports = {
         extensions: ['', '.html', '.js', '.json', '.css'],
         alias: {
             leaflet_css: __dirname + "/node_modules/leaflet/dist/leaflet.css",
+            leaflet_layers2x: __dirname + "/node_modules/leaflet/dist/images/layers-2x.png",
+            leaflet_layers: __dirname + "/node_modules/leaflet/dist/images/layers.png",
             leaflet_marker: __dirname + "/node_modules/leaflet/dist/images/marker-icon.png",
             leaflet_marker_2x: __dirname + "/node_modules/leaflet/dist/images/marker-icon-2x.png",
             leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png",

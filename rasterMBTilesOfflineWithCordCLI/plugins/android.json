@@ -10,7 +10,7 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-sqlite-evfree-attach-eval": {
+        "cordova-sqlite-ext": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
